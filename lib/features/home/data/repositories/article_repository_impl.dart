@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_news_app_api/core/network/network_info.dart';
 import 'package:flutter_news_app_api/features/home/domain/repositories/article_repository.dart';
 import 'package:flutter_news_app_api/features/home/data/models/article_model.dart';
@@ -23,17 +24,30 @@ class ArticleRepositoryImpl implements ArticleRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteArticles = await remoteDataSource.getTopHeadlines();
-        localDataSource.cacheArticles(remoteArticles);
+        await localDataSource.cacheArticles(remoteArticles);
         return Right(remoteArticles);
+      } on DioException catch (e) {
+        print('DioError: ${e.message}');
+        print('DioError response: ${e.response?.data}');
+        return Left(ServerFailure(
+          message: e.response?.data?['message'] ?? 'Failed to fetch top headlines',
+        ));
       } catch (e) {
-        return Left(ServerFailure(message: 'Failed to fetch top headlines'));
+        print('Unexpected error: $e');
+        return Left(ServerFailure(
+          message: 'An unexpected error occurred while fetching headlines',
+        ));
       }
     } else {
       try {
         final localArticles = await localDataSource.getCachedArticles();
+        if (localArticles.isEmpty) {
+          return Left(CacheFailure(message: 'No cached articles available'));
+        }
         return Right(localArticles);
       } catch (e) {
-        return Left(CacheFailure(message: 'No cached data found'));
+        print('Cache error: $e');
+        return Left(CacheFailure(message: 'Failed to retrieve cached articles'));
       }
     }
   }
@@ -44,11 +58,20 @@ class ArticleRepositoryImpl implements ArticleRepository {
       try {
         final remoteArticles = await remoteDataSource.searchArticles(query);
         return Right(remoteArticles);
+      } on DioException catch (e) {
+        print('DioError: ${e.message}');
+        print('DioError response: ${e.response?.data}');
+        return Left(ServerFailure(
+          message: e.response?.data?['message'] ?? 'Failed to search articles',
+        ));
       } catch (e) {
-        return Left(ServerFailure(message: 'Failed to search articles'));
+        print('Unexpected error: $e');
+        return Left(ServerFailure(
+          message: 'An unexpected error occurred while searching articles',
+        ));
       }
     } else {
-      return Left(NetworkFailure(message: 'No internet connection'));
+      return Left(NetworkFailure(message: 'No internet connection available'));
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import '../../domain/entities/article_entity.dart';
 
 class ArticleModel extends Article {
@@ -19,13 +18,17 @@ class ArticleModel extends Article {
   );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
+    // Default values for missing or null fields
+    const defaultImage = 'https://via.placeholder.com/600x400?text=No+Image';
+    const defaultText = 'Not available';
+
     return ArticleModel(
-      title: json['title'],
-      description: json['description'],
-      url: json['url'],
-      urlToImage: json['urlToImage'],
-      publishedAt: json['publishedAt'],
-      content: json['content'],
+      title: json['title']?.toString() ?? defaultText,
+      description: json['description']?.toString() ?? defaultText,
+      url: json['url']?.toString() ?? '',
+      urlToImage: json['urlToImage']?.toString() ?? defaultImage,
+      publishedAt: json['publishedAt']?.toString() ?? DateTime.now().toIso8601String(),
+      content: json['content']?.toString() ?? defaultText,
     );
   }
 
