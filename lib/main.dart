@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        home:  HomeScreen(),
+        home: HomeScreen(),
         builder: (context, child) {
           if (child == null) return const SizedBox.shrink();
 
@@ -141,13 +141,13 @@ class CustomErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
+        child: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                const Icon(
                 Icons.error_outline,
                 color: Colors.red,
                 size: 60,
@@ -162,47 +162,47 @@ class CustomErrorWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'We\'re working on fixing this issue',
-                style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              // Show error details in debug mode
-              if (errorDetails.stack != null && true) // Replace true with !kReleaseMode for production
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Text(
-                      errorDetails.stack.toString(),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontFamily: 'monospace',
-                      ),
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              const SizedBox(height: 16),
-              // Retry button
-              ElevatedButton(
-                onPressed: () {
-                  print('Retry attempted at $_currentTime by $_currentUser');
-                  // Navigate to home page
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => HomeScreen()),
-                        (route) => false,
-                  );
-                },
-                child: const Text('Retry'),
-              ),
-            ],
-          ),
-        ),
-      ),
+                  'Were working on fixing this issue',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            // Show error details in debug mode
+            if (errorDetails.stack != null && true) // Replace true with !kReleaseMode for production
+        Container(
+        padding: const EdgeInsets.all(8),
+    decoration: BoxDecoration(
+    color: Colors.grey[200],
+    borderRadius: BorderRadius.circular(8),
+    ),
+    child: SingleChildScrollView(
+    child: Text(
+    errorDetails.stack.toString(),
+    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+    fontFamily: 'monospace',
+    ),
+    maxLines: 5,
+    overflow: TextOverflow.ellipsis,
+    ),
+    ),
+    ),
+    const SizedBox(height: 16),
+    // Retry button
+    ElevatedButton(
+    onPressed: () {
+    print('Retry attempted at $_currentTime by $_currentUser');
+    // Navigate to home page
+    Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(builder: (_) => HomeScreen()),
+    (route) => false,
+    );
+    },
+    child: const Text('Retry'),
+    ),
+    ],
+    ),
+    ),
+    ),
     );
   }
 }

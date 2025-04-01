@@ -1,27 +1,20 @@
-//
-// // any use case with no params will implment this class
-// abstract class UseCase<T> {
-//   const UseCase();
-//   Future<T> call();
-// }
-//
-// abstract class UseCaseWithParams<T, Params> {
-//   const UseCaseWithParams();
-//   Future<T> call(Params params);
-// }
-//Open/Closed Principle (OCP):Classes are open for extension but closed for modification
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+
 import '../errors/failure.dart';
 
-abstract class UseCaseWithParams<Type, Params> {
-  const UseCaseWithParams();
+/// Base class for all use cases
+abstract class UseCase<Type, Params> {
   Future<Either<Failure, Type>> call(Params params);
 }
 
-// For use cases that don't need parameters
-class UsecaseWithNoParams extends Equatable {
-  const UsecaseWithNoParams();
+/// No parameters class for use cases that don't require parameters
+class NoParams extends Params {
   @override
   List<Object?> get props => [];
+}
+
+/// Base class for use case parameters
+abstract class Params extends Equatable {
+  const Params();
 }

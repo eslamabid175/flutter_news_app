@@ -1,33 +1,44 @@
 import 'package:equatable/equatable.dart';
 
-import '../utils/constants.dart';
-
-/// Base Failure class for the app
-/// Using Equatable for value comparison
+/// Base class for all failures
 abstract class Failure extends Equatable {
   final String message;
-  final DateTime timestamp;
-  final String userContext;
+  final String? code;
 
-  const Failure(this.message)
-      : timestamp = AppConstants.currentTime ,
-        userContext = AppConstants.currentUser;
+  const Failure({required this.message, this.code});
 
   @override
-  List<Object> get props => [message, timestamp, userContext];
+  List<Object?> get props => [message, code];
 }
 
-/// Failure for server errors
-class ServerFailure extends Failure {
-  const ServerFailure(String message) : super(message);
+/// General failure class
+class GeneralFailure extends Failure {
+  const GeneralFailure({
+    required String message,
+    String? code,
+  }) : super(message: message, code: code);
 }
 
-/// Failure for network errors
+/// Network failure class
 class NetworkFailure extends Failure {
-  const NetworkFailure(String message) : super(message);
+  const NetworkFailure({
+    required String message,
+    String? code,
+  }) : super(message: message, code: code);
 }
 
-/// Failure for cache errors
+/// Server failure class
+class ServerFailure extends Failure {
+  const ServerFailure({
+    required String message,
+    String? code,
+  }) : super(message: message, code: code);
+}
+
+/// Cache failure class
 class CacheFailure extends Failure {
-  const CacheFailure(String message) : super(message);
+  const CacheFailure({
+    required String message,
+    String? code,
+  }) : super(message: message, code: code);
 }

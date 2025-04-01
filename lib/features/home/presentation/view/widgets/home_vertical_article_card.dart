@@ -6,7 +6,7 @@ import 'home_latest_stories_image_vertical.dart';
 import 'home_article_readmorebtn.dart';
 
 class VerticalArticleCard extends StatelessWidget {
-  final ArticleEntity article;
+  final Article article;
 
   const VerticalArticleCard({super.key, required this.article});
 

@@ -5,7 +5,7 @@ import 'package:flutter_news_app_api/features/home/presentation/view/widgets/hom
 import 'home_vertical_article_card.dart';
 
 class HomeLatestStoriesListviewVertical extends StatelessWidget {
-  final List<ArticleEntity> articles;
+  final List<Article> articles;
   const HomeLatestStoriesListviewVertical({super.key, required this.articles});
 
   @override

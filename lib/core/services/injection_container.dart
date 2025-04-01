@@ -1,16 +1,16 @@
+import 'package:flutter_news_app_api/features/home/domain/usecases/search_article.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_news_app_api/features/home/data/repositories/article_repository_impl.dart';
+import 'package:flutter_news_app_api/features/home/domain/repositories/article_repository.dart';
+import 'package:flutter_news_app_api/features/home/presentation/viewModel/articles_cubit.dart';
+import 'package:flutter_news_app_api/core/network/network_info.dart';
+import 'package:flutter_news_app_api/core/api/dio_helper.dart';
+
 import '../../features/home/data/dataSources/local/article_local_datasource.dart';
 import '../../features/home/data/dataSources/remote/remote_data_source.dart';
-import '../../features/home/data/repositories/article_repository_impl.dart';
-import '../../features/home/domain/repositories/article_repository.dart';
 import '../../features/home/domain/usecases/get_top_headlines.dart';
-import '../../features/home/domain/usecases/search_article.dart';
-import '../../features/home/presentation/viewModel/articles_cubit.dart';
-import '../api/dio_helper.dart';
-import '../network/network_info.dart';
-
 
 /// GetIt instance for dependency injection
 final sl = GetIt.instance;
@@ -18,7 +18,7 @@ final sl = GetIt.instance;
 /// Class to handle dependency injection setup
 class DependencyInjector {
   // Current user and time for tracking
-  static final _currentTime = DateTime.parse('2025-03-30 12:10:32');
+  static final _currentTime = DateTime.parse('2025-03-30 12:16:14');
   static const _currentUser = 'eslamabid175';
 
   /// Initialize all dependencies
@@ -83,7 +83,7 @@ class DependencyInjector {
 
     // Use cases
     sl.registerLazySingleton(() => GetTopHeadlinesUseCase(sl()));
-    sl.registerLazySingleton(() => SearchArticlesUsecase(sl()));
+    sl.registerLazySingleton(() => SearchArticlesUseCase(sl()));
 
     // Repository
     sl.registerLazySingleton<ArticleRepository>(

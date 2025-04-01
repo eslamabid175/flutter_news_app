@@ -7,13 +7,12 @@ import '../../domain/entities/article_entity.dart';
 import '../../domain/usecases/get_top_headlines.dart';
 import 'articles_state.dart';
 
-
 /// ArticlesCubit manages the state of articles in the app
 /// It handles loading, refreshing, and searching articles
 class ArticlesCubit extends Cubit<ArticlesState> {
   // Use cases required by this cubit
   final GetTopHeadlinesUseCase getTopHeadlines;
-  final SearchArticlesUsecase searchArticles;
+  final SearchArticlesUseCase searchArticles;
 
   // Tracking metadata
   final DateTime _currentTime = DateTime.parse('2025-03-30 11:49:19');

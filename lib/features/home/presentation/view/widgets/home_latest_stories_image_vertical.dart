@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app_api/features/home/domain/entities/article_entity.dart';
 
 class HomeArticalImageVertical extends StatelessWidget {
-final ArticleEntity article;
+final Article article;
   const HomeArticalImageVertical({super.key, required this.article});
 
   @override

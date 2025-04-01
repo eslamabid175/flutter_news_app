@@ -1,36 +1,33 @@
-import 'package:equatable/equatable.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter_news_app_api/core/usecase/usecase.dart';
-import '../../../../core/errors/failure.dart';
-import '../entities/article_entity.dart';
-import '../repositories/article_repository.dart';
 
-class SearchArticlesParams extends Equatable {
+import 'package:dartz/dartz.dart';
+import 'package:flutter_news_app_api/features/home/domain/repositories/article_repository.dart';
+import 'package:flutter_news_app_api/features/home/data/models/article_model.dart';
+
+import '../../../../core/errors/failure.dart';
+import '../../../../core/usecase/usecase.dart';
+
+class SearchArticlesUseCase implements UseCase<List<ArticleModel>, SearchArticlesParams> {
+  final ArticleRepository repository;
+
+  SearchArticlesUseCase(this.repository);
+
+  @override
+  Future<Either<Failure, List<ArticleModel>>> call(SearchArticlesParams params) async {
+    return await repository.searchArticles(params.query);
+  }
+}
+
+class SearchArticlesParams extends Params {
   final String query;
   final String? sortBy;
   final String? language;
 
-  const SearchArticlesParams({
+  SearchArticlesParams({
     required this.query,
     this.sortBy,
     this.language,
   });
 
   @override
-  List<Object?> get props => [query, sortBy, language];
-}
-
-class SearchArticlesUsecase implements UseCaseWithParams<List<ArticleEntity>, SearchArticlesParams> {
-  final ArticleRepository repository;
-
-  SearchArticlesUsecase(this.repository);
-
-  @override
-  Future<Either<Failure, List<ArticleEntity>>> call(SearchArticlesParams params) async {
-    return await repository.searchArticles(
-      query: params.query,
-      sortBy: params.sortBy,
-      language: params.language,
-    );
-  }
+  List<Object?> get props => [query, sortBy ?? '', language ?? ''];
 }

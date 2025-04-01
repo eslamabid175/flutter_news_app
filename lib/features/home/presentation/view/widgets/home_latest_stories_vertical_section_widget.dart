@@ -7,7 +7,7 @@ import 'home_header_row_sectionName_viewAllbtn.dart';
 class HomeLatestStoriesVerticalSectionWidget extends StatelessWidget {
   final String sectionName;
   final VoidCallback onViewAllPressed;
-  final List<ArticleEntity> articles;
+  final List<Article> articles;
 
   const HomeLatestStoriesVerticalSectionWidget({
     super.key,

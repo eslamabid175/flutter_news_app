@@ -13,4 +13,28 @@ class AppTextStyles{
       fontWeight: FontWeight.w400,color: AppColors.greyColor);
   static TextStyle font12reqularwhite = GoogleFonts.nunitoSans(fontSize: 12,
       fontWeight: FontWeight.w400,color: Colors.white);
+  static const TextStyle appBarTitle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle headlineLarge = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle headlineMedium = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+  );
+
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+  );
 }

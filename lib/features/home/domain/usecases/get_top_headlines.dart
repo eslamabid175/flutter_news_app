@@ -1,43 +1,31 @@
+
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_news_app_api/core/usecase/usecase.dart';
+import 'package:flutter_news_app_api/features/home/domain/repositories/article_repository.dart';
+import 'package:flutter_news_app_api/features/home/data/models/article_model.dart';
 
 import '../../../../core/errors/failure.dart';
-import '../entities/article_entity.dart';
-import '../repositories/article_repository.dart';
+import '../../../../core/usecase/usecase.dart';
 
-/// Parameters for GetTopHeadlines use case
-/// Extends Equatable for value comparison
-class GetTopHeadlinesParams extends Equatable {
+class GetTopHeadlinesUseCase implements UseCase<List<ArticleModel>, GetTopHeadlinesParams> {
+  final ArticleRepository repository;
+
+  GetTopHeadlinesUseCase(this.repository);
+
+  @override
+  Future<Either<Failure, List<ArticleModel>>> call(GetTopHeadlinesParams params) async {
+    return await repository.getTopHeadlines();
+  }
+}
+
+class GetTopHeadlinesParams extends Params {
   final String country;
   final String? category;
 
-  /// Constructor with default country value
-  const GetTopHeadlinesParams({
-    this.country = 'eg',
+  GetTopHeadlinesParams({
+    required this.country,
     this.category,
   });
 
   @override
-  List<Object?> get props => [country, category];
-}
-
-/// Use case for getting top headlines
-/// Implements generic UseCase class
-class GetTopHeadlinesUseCase implements UseCaseWithParams<List<ArticleEntity>, GetTopHeadlinesParams> {
-  final ArticleRepository repository;
-
-  /// Constructor requires repository
-  /// Following Dependency Inversion Principle
-  GetTopHeadlinesUseCase(this.repository);
-
-  /// Executes the use case
-  /// Returns Either type for functional error handling
-  @override
-  Future<Either<Failure, List<ArticleEntity>>> call(GetTopHeadlinesParams params) async {
-    return await repository.getTopHeadlines(
-      country: params.country,
-      category: params.category,
-    );
-  }
+  List<Object?> get props => [country, category ?? ''];
 }
