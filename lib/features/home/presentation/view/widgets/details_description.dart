@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 class DescriptionSection extends StatelessWidget {
   final String description;
   final String content;
   final String url;
-  static const currentTime = '2025-04-01 20:38:33';
+  static const currentTime = '2025-04-03 12:49:17';
   static const currentUser = 'eslamabid175';
 
   const DescriptionSection({
@@ -15,6 +14,7 @@ class DescriptionSection extends StatelessWidget {
     required this.url,
   });
 
+  // URL launching helper method
   Future<void> _launchURL(BuildContext context) async {
     try {
       print('$currentTime - $currentUser: Attempting to launch URL: $url');
@@ -26,22 +26,21 @@ class DescriptionSection extends StatelessWidget {
         );
       } else {
         print('$currentTime - $currentUser: Could not launch URL: $url');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Could not open article URL'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        _showErrorSnackbar(context, 'Could not open article URL');
       }
     } catch (e) {
       print('$currentTime - $currentUser: Error launching URL: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error opening article: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      _showErrorSnackbar(context, 'Error opening article: $e');
     }
+  }
+
+  void _showErrorSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 
   @override
@@ -60,6 +59,7 @@ class DescriptionSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 20),
+            // Full-width button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

@@ -7,17 +7,19 @@ class HomeArticleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //this is cliprrect is used to make the image rounded corners and
-    // its means the image will be circular
-    return  ClipRRect(
+    // ClipRRect chosen for image rounding because:
+    // 1. Hardware-accelerated clipping
+    // 2. Better performance than Container decoration
+    return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Image.network(
-        article.urlToImage  ?? '',
+        article.urlToImage,
         height: 150,
-        //this is used to make the image fit to the screen
+        // Double.infinity allows image to fill available width
         width: double.infinity,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
+          // Fallback container for error states
           return Container(
             height: 120,
             color: Colors.grey[300],

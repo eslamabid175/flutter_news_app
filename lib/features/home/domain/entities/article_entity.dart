@@ -1,6 +1,10 @@
+// Import Equatable for value comparison
 import 'package:equatable/equatable.dart';
 
+// Base entity class for articles
+// Extends Equatable for value equality comparison
 class Article extends Equatable {
+  // Class fields with documentation
   /// The headline or title of the article
   final String title;
 
@@ -19,6 +23,8 @@ class Article extends Equatable {
   /// The unformatted content of the article
   final String content;
 
+  // Constructor requiring all fields
+  // const constructor for improved performance
   const Article({
     required this.title,
     required this.description,
@@ -28,6 +34,8 @@ class Article extends Equatable {
     required this.content,
   });
 
+  // Override props for Equatable
+  // Defines which fields are used for equality comparison
   @override
   List<Object?> get props => [
     title,

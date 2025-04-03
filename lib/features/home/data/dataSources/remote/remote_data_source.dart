@@ -9,7 +9,7 @@ abstract class ArticleRemoteDataSource {
   Future<List<ArticleModel>> searchArticles(String query);
 }
 
-// Implementation of the ArticleRemoteDataSource
+// Implementation of remote data source using Dio
 class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
   // Constants for logging
   static const _currentTime = '2025-04-01 15:30:22';
@@ -19,6 +19,7 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
   Future<List<ArticleModel>> getTopHeadlines() async {
     try {
       print('$_currentTime - $_currentUser: Fetching top headlines');
+      // Make API request using DioHelper
 
       final response = await DioHelper.dio.get(
         AppConstants.topHeadlines,
@@ -29,6 +30,7 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
       );
 
       print('$_currentTime - $_currentUser: Response status: ${response.statusCode}');
+      // Handle response
 
       if (response.statusCode == 200) {
         if (response.data['status'] == 'error') {
@@ -38,12 +40,14 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteDataSource {
             error: response.data['message'] ?? 'API returned an error',
           );
         }
+        // Parse articles from response
 
         final articlesList = response.data['articles'] as List?;
         if (articlesList == null || articlesList.isEmpty) {
           print('$_currentTime - $_currentUser: No articles found in response');
           return [];
         }
+        // Convert JSON to ArticleModel objects
 
         final articles = <ArticleModel>[];
         for (var articleData in articlesList) {

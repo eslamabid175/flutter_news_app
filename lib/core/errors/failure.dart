@@ -1,17 +1,23 @@
+// Using Equatable for value equality comparison
+// Could implement equals manually, but Equatable reduces boilerplate
 import 'package:equatable/equatable.dart';
 
-/// Base class for all failures
+// Abstract base class for failures
+// Using Failure instead of Exception allows for more controlled error handling
 abstract class Failure extends Equatable {
   final String message;
+  // Optional code for more detailed error handling
   final String? code;
 
   const Failure({required this.message, this.code});
 
+  // Props for Equatable - ensures proper equality comparison
   @override
   List<Object?> get props => [message, code];
 }
 
-/// General failure class
+// Specific failure classes - following same pattern as exceptions
+// Could use enum for types instead, but separate classes allow for extension
 class GeneralFailure extends Failure {
   const GeneralFailure({
     required String message,
@@ -19,7 +25,6 @@ class GeneralFailure extends Failure {
   }) : super(message: message, code: code);
 }
 
-/// Network failure class
 class NetworkFailure extends Failure {
   const NetworkFailure({
     required String message,
@@ -27,7 +32,6 @@ class NetworkFailure extends Failure {
   }) : super(message: message, code: code);
 }
 
-/// Server failure class
 class ServerFailure extends Failure {
   const ServerFailure({
     required String message,
@@ -35,7 +39,6 @@ class ServerFailure extends Failure {
   }) : super(message: message, code: code);
 }
 
-/// Cache failure class
 class CacheFailure extends Failure {
   const CacheFailure({
     required String message,
