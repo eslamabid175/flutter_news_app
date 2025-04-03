@@ -2,7 +2,6 @@
 
 A modern news application built with Flutter, featuring real-time news updates, a clean Material Design interface, and seamless user experience.
 
-![Last Commit](https://img.shields.io/github.com/eslamabid175/flutter_news_app)
 ![Flutter Version](https://img.shields.io/badge/Flutter-3.19.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
