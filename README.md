@@ -2,7 +2,7 @@
 
 A modern news application built with Flutter, featuring real-time news updates, a clean Material Design interface, and seamless user experience.
 
-![Last Commit](https://img.shields.io/github/last-commit/eslamabid175/flutter_news_app_api)
+![Last Commit](https://img.shields.io/github.com/eslamabid175/flutter_news_app)
 ![Flutter Version](https://img.shields.io/badge/Flutter-3.19.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -10,8 +10,8 @@ A modern news application built with Flutter, featuring real-time news updates, 
 
 <p align="center">
   <img src="assets/screenshots/home_screen.png" width="200" alt="Home Screen"/>
-  <img src="assets/screenshots/article_details.png" width="200" alt="Article Details"/>
-  <img src="assets/screenshots/search_screen.png" width="200" alt="Search Screen"/>
+  <img src="assets/screenshots/details_screen.png" width="200" alt="Article Details"/>
+  <img src="assets/screenshots/favorite_screen.png" width="200" alt="Favorite Screen"/>
 </p>
 
 ## ✨ Features
@@ -30,6 +30,10 @@ A modern news application built with Flutter, featuring real-time news updates, 
 lib/
 ├── core/
 │   ├── themeing/
+│   ├── networking/
+│   ├── utils/
+│   ├── constants/
+│   ├── errors/
 │   ├── services/
 │   └── widgets/
 ├── features/
@@ -62,7 +66,7 @@ lib/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/eslamabid175/flutter_news_app_api.git
+git clone https://github.com/eslamabid175/flutter_news_app
 ```
 
 2. Install dependencies:
